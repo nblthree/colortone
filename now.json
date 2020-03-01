@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "colortone",
+  "alias": "colortone.dev",
+  "builds": [
+    {
+      "src": "/demo/package.json",
+      "use": "@now/static-build",
+      "config": {"distDir": "build"}
+    }
+  ]
+}
