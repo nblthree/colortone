@@ -16,7 +16,7 @@
     "lint": "eslint . --ext .ts,.tsx --format visualstudio",
     "now-build": "yarn build",
     "now-dev": "NODE_ENV=development BROWSER=none react-scripts start",
-    "start": "NODE_ENV=development react-scripts start",
+    "start": "NODE_ENV=development react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
