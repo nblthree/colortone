@@ -72,7 +72,12 @@ const validateArgs = (color, ratio) => {
     throw new Error(`Invalid arguments`);
   }
 
-  if (typeof ratio !== "number" || ratio < 0 || ratio > 1) {
+  if (
+    typeof ratio !== "number" ||
+    Number.isNaN(ratio) ||
+    ratio < 0 ||
+    ratio > 1
+  ) {
     throw new Error(`The ratio value isn't a valid one`);
   }
 };

@@ -6,21 +6,14 @@ import { darken, lighten } from '@marchworks/colortone';
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
   background-color: black;
 `;
 
 const Port = styled.div`
   width: 100%;
-  height: ${props => props.height || "40%"};
   padding: 10px 5% 10px 5%;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -28,14 +21,28 @@ const Port = styled.div`
 
 const Flex = styled.div`
   width: 100%;
-  height: 40%;
+  min-height: 130px;
   display: flex;
   justify-content: center;
+  margin: 20px 0 20px 0;
+`;
+
+const FlexContainer = styled(Flex)`
+  overflow-x: scroll;
+  min-height: 0;
+  justify-content: start;
 `;
 
 const Display = styled.div`
-  width: ${props => props.width || "100%"};
-  height: ${props => props.height || "40%"};
+  min-width: 50%;
+  height: 100px;
+  background-color: ${props => props.bgColor || "#ffffff"};
+  display: flex;
+`;
+
+const DisplayLoop = styled.div`
+  min-width: 150px;
+  height: 120px;
   background-color: ${props => props.bgColor || "#ffffff"};
   display: flex;
 `;
@@ -52,7 +59,7 @@ const Span = styled.span`
 const RatioInput = styled.input`
   width: 120px;
   max-width: 20%;
-  height: 100%;
+  height: 130px;
   padding: 2px 10px 2px 10px;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 10px, rgba(0, 0, 0, 0.16) 0px 2px 5px;
@@ -80,18 +87,38 @@ function App() {
   const lighter = lighten(color, ratio)
   return (
     <Container>
-      <Port height="50%">
+      <Port>
         <Flex>
           <MaterialPicker color={color} onChangeComplete={handleChangeComplete} />
-          <RatioInput type="text" defaultValue={ratio} onChange={handleChange} />
+          <RatioInput type="text" defaultValue={ratio} onBlur={handleChange} />
         </Flex>
         <Display bgColor={color}><Span>Original: {color}</Span></Display>
       </Port>
       <Port>
         <Flex>
-          <Display height="100%" width="50%" bgColor={darker}><Span>Darker: {darker}</Span></Display>
-          <Display height="100%" width="50%" bgColor={lighter}><Span>Lighter: {lighter}</Span></Display>
+          <Display bgColor={darker}><Span>Darker: {darker}</Span></Display>
+          <Display bgColor={lighter}><Span>Lighter: {lighter}</Span></Display>
         </Flex>
+      </Port>
+      <Port>
+        <FlexContainer>
+          <DisplayLoop bgColor={color}><Span>{color}</Span></DisplayLoop>
+          {
+            (new Array(50).fill(0)).map((v, i) => {
+              const d = darken(color, ratio + i*(1-ratio)/50)
+              return (<DisplayLoop key={`${i}-d`} bgColor={d}><Span>{d}</Span></DisplayLoop>)
+            })
+          }
+        </FlexContainer>
+        <FlexContainer>
+          <DisplayLoop bgColor={color}><Span>{color}</Span></DisplayLoop>
+          {
+            (new Array(50).fill(0)).map((v, i) => {
+              const l = lighten(color, ratio + i*(1-ratio)/50)
+              return (<DisplayLoop key={`${i}-l`} bgColor={l}><Span>{l}</Span></DisplayLoop>)
+            })
+          }
+        </FlexContainer>
       </Port>
     </Container>
   );
