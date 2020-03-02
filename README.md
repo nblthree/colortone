@@ -2,7 +2,7 @@
   <h2>Colortone</h2>
 </div>
 
-## 📦 Getting Started
+## Getting Started
 
 ```
 npm install @marchworks/colortone
@@ -17,9 +17,8 @@ yarn add @marchworks/colortone
 import { darken, lighten } from 'colortone';
 
 // method(color, ratio)
-const darkerBlueTone = darken("#0000ff", 0.2)
-const lighterBlueTone = lighten("#0000ff", 0.2)
-...
+const darkerBlueTone = darken("#0000ff", 0.05)
+const lighterBlueTone = lighten("#0000ff", 0.05)
 ```
 
 ### Args
