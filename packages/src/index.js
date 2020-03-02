@@ -22,13 +22,13 @@ const rgbToHex = (r, g, b) => {
 const validateArgs = (color, ratio) => {
   if (typeof color === "string") {
     if (!hexToRgb(color)) {
-      throw new Error(`The passed value isn't a valid hex string`);
+      console.error(`The passed value isn't a valid hex string`);
     }
   } else if (Array.isArray(color)) {
     const [r, b, g] = color;
 
     if (color.length !== 3) {
-      throw new Error(`The passed array should contains 3 values [r, g, b]`);
+      console.error(`The passed array should contains 3 values [r, g, b]`);
     }
 
     if (
@@ -42,7 +42,7 @@ const validateArgs = (color, ratio) => {
       b < 0 ||
       b > 255
     ) {
-      throw new Error(`The passed RGB value isn't a valid one`);
+      console.error(`The passed RGB value isn't a valid one`);
     }
   } else if (typeof color === "object") {
     const { r, g, b } = color;
@@ -52,7 +52,7 @@ const validateArgs = (color, ratio) => {
       typeof g === "undefined" ||
       typeof b === "undefined"
     ) {
-      throw new Error(`The passed object isn't a valid one`);
+      console.error(`The passed object isn't a valid one`);
     }
 
     if (
@@ -66,10 +66,10 @@ const validateArgs = (color, ratio) => {
       b < 0 ||
       b > 255
     ) {
-      throw new Error(`The passed RGB value isn't a valid one`);
+      console.error(`The passed RGB value isn't a valid one`);
     }
   } else {
-    throw new Error(`Invalid arguments`);
+    console.error(`Invalid arguments`);
   }
 
   if (
@@ -78,7 +78,7 @@ const validateArgs = (color, ratio) => {
     ratio < 0 ||
     ratio > 1
   ) {
-    throw new Error(`The ratio value isn't a valid one`);
+    console.error(`The ratio value isn't a valid one`);
   }
 };
 
