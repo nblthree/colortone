@@ -19,16 +19,21 @@ const rgbToHex = (r, g, b) => {
   return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 };
 
+const logError = error => {
+  console.error(error);
+  return true;
+};
+
 const validateArgs = (color, ratio) => {
   if (typeof color === "string") {
     if (!hexToRgb(color)) {
-      console.error(`The passed value isn't a valid hex string`);
+      logError(`The passed value isn't a valid hex string`);
     }
   } else if (Array.isArray(color)) {
     const [r, b, g] = color;
 
     if (color.length !== 3) {
-      console.error(`The passed array should contains 3 values [r, g, b]`);
+      logError(`The passed array should contains 3 values [r, g, b]`);
     }
 
     if (
@@ -42,7 +47,7 @@ const validateArgs = (color, ratio) => {
       b < 0 ||
       b > 255
     ) {
-      console.error(`The passed RGB value isn't a valid one`);
+      logError(`The passed RGB value isn't a valid one`);
     }
   } else if (typeof color === "object") {
     const { r, g, b } = color;
@@ -52,7 +57,7 @@ const validateArgs = (color, ratio) => {
       typeof g === "undefined" ||
       typeof b === "undefined"
     ) {
-      console.error(`The passed object isn't a valid one`);
+      logError(`The passed object isn't a valid one`);
     }
 
     if (
@@ -66,10 +71,10 @@ const validateArgs = (color, ratio) => {
       b < 0 ||
       b > 255
     ) {
-      console.error(`The passed RGB value isn't a valid one`);
+      logError(`The passed RGB value isn't a valid one`);
     }
   } else {
-    console.error(`Invalid arguments`);
+    logError(`Invalid arguments`);
   }
 
   if (
@@ -78,12 +83,12 @@ const validateArgs = (color, ratio) => {
     ratio < 0 ||
     ratio > 1
   ) {
-    console.error(`The ratio value isn't a valid one`);
+    logError(`The ratio value isn't a valid one`);
   }
 };
 
 export const darken = (color, ratio) => {
-  validateArgs(color, ratio);
+  if (validateArgs(color, ratio)) return null;
 
   const rgb = [];
   if (typeof color === "string") {
@@ -103,7 +108,7 @@ export const darken = (color, ratio) => {
 };
 
 export const lighten = (color, ratio) => {
-  validateArgs(color, ratio);
+  if (validateArgs(color, ratio)) return null;
 
   const rgb = [];
   if (typeof color === "string") {
