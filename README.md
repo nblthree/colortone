@@ -1,5 +1,5 @@
  <div align="center">
-  <h2>Colortone</h2>
+  <h1>Colortone</h1>
 </div>
 
 ## Getting Started
@@ -14,11 +14,11 @@ yarn add @marchworks/colortone
 
 ### Usage
 ```
-import { darken, lighten } from 'colortone';
+import colortone from 'colortone';
 
-// method(color, ratio)
-const darkerBlueTone = darken("#0000ff", 0.05)
-const lighterBlueTone = lighten("#0000ff", 0.05)
+// colortone(color, ratio) --> hex || null
+const darkerBlueTone = colortone("#0000ff", -0.05)
+const lighterBlueTone = colortone("#0000ff", 0.05)
 ```
 
 ### Args
@@ -29,4 +29,4 @@ The color arg can be in any of the following formats
 [r, g, b] --> the r, g and b values should be of type number
 {r, g, b} --> the r, g and b values should be of type number
 ```
-the ratio can not be outside [0, 1]
+the ratio can not be outside [-1, 1]

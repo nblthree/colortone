@@ -80,14 +80,14 @@ const validateArgs = (color, ratio) => {
   if (
     typeof ratio !== "number" ||
     Number.isNaN(ratio) ||
-    ratio < 0 ||
+    ratio < -1 ||
     ratio > 1
   ) {
     logError(`The ratio value isn't a valid one`);
   }
 };
 
-export const darken = (color, ratio) => {
+const colortone = (color, ratio) => {
   if (validateArgs(color, ratio)) return null;
 
   const rgb = [];
@@ -100,33 +100,18 @@ export const darken = (color, ratio) => {
     rgb.push(r, g, b);
   }
 
-  for (let i = 0; i < rgb.length; i++) {
-    rgb[i] = Math.round(rgb[i] - ratio * rgb[i]);
+  if (ratio > 0) {
+    for (let i = 0; i < rgb.length; i++) {
+      rgb[i] = Math.round(rgb[i] + ratio * (255 - rgb[i]));
+    }
+  } else {
+    ratio = Math.abs(ratio);
+    for (let i = 0; i < rgb.length; i++) {
+      rgb[i] = Math.round(rgb[i] - ratio * rgb[i]);
+    }
   }
 
   return rgbToHex(...rgb);
 };
-
-export const lighten = (color, ratio) => {
-  if (validateArgs(color, ratio)) return null;
-
-  const rgb = [];
-  if (typeof color === "string") {
-    rgb.push(...hexToRgb(color));
-  } else if (Array.isArray(color)) {
-    rgb.push(...color);
-  } else if (typeof color === "object") {
-    const { r, g, b } = color;
-    rgb.push(r, g, b);
-  }
-
-  for (let i = 0; i < rgb.length; i++) {
-    rgb[i] = Math.round(rgb[i] + ratio * (255 - rgb[i]));
-  }
-
-  return rgbToHex(...rgb);
-};
-
-const colortone = { darken, lighten };
 
 export default colortone;

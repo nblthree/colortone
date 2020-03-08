@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MaterialPicker } from 'react-color';
-import { darken, lighten } from '@marchworks/colortone';
+import colortone from '@marchworks/colortone';
 
 const Container = styled.div`
   width: 100%;
@@ -83,8 +83,10 @@ function App() {
     setRatio(temp);
   }
 
-  const darker = darken(color, ratio)
-  const lighter = lighten(color, ratio)
+  const darker = colortone(color, -ratio)
+  const lighter = colortone(color, ratio)
+  let oldColorD = color
+  let oldColorL = color
   return (
     <Container>
       <Port>
@@ -105,8 +107,8 @@ function App() {
           <DisplayLoop bgColor={color}><Span>{color}</Span></DisplayLoop>
           {
             (new Array(50).fill(0)).map((v, i) => {
-              const d = darken(color, ratio + i*(1-ratio)/50)
-              return (<DisplayLoop key={`${i}-d`} bgColor={d}><Span>{d}</Span></DisplayLoop>)
+              oldColorD = colortone(oldColorD, -ratio)
+              return (<DisplayLoop key={`${i}-d`} bgColor={oldColorD}><Span>{oldColorD}</Span></DisplayLoop>)
             })
           }
         </FlexContainer>
@@ -114,8 +116,8 @@ function App() {
           <DisplayLoop bgColor={color}><Span>{color}</Span></DisplayLoop>
           {
             (new Array(50).fill(0)).map((v, i) => {
-              const l = lighten(color, ratio + i*(1-ratio)/50)
-              return (<DisplayLoop key={`${i}-l`} bgColor={l}><Span>{l}</Span></DisplayLoop>)
+              oldColorL = colortone(oldColorL, ratio)
+              return (<DisplayLoop key={`${i}-l`} bgColor={oldColorL}><Span>{oldColorL}</Span></DisplayLoop>)
             })
           }
         </FlexContainer>
