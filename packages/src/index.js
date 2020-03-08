@@ -102,12 +102,12 @@ const colortone = (color, ratio) => {
 
   if (ratio > 0) {
     for (let i = 0; i < rgb.length; i++) {
-      rgb[i] = Math.round(rgb[i] + ratio * (255 - rgb[i]));
+      rgb[i] = Math.ceil(rgb[i] + ratio * (255 - rgb[i]));
     }
   } else {
     ratio = Math.abs(ratio);
     for (let i = 0; i < rgb.length; i++) {
-      rgb[i] = Math.round(rgb[i] - ratio * rgb[i]);
+      rgb[i] = Math.floor(rgb[i] - ratio * rgb[i]);
     }
   }
 
