@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "@marchworks/colortone": "latest",
-    "react": "^16.13.0",
-    "react-color": "^2.18.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.0",
-    "styled-components": "^5.0.1"
+    "react": "latest",
+    "react-color": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "styled-components": "latest"
   },
   "scripts": {
     "build": "NODE_ENV=production react-scripts build",
