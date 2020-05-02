@@ -1,6 +1,6 @@
 /*!
  * 
- *   @marchworks/colortone v1.0.6
+ *   @marchworks/colortone v1.0.7
  *   https://github.com/MarchWorks/colortone
  * 
  *   Copyright (c) MarchWorks (https://github.com/MarchWorks)

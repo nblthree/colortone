@@ -1,6 +1,6 @@
 {
   "name": "@marchworks/colortone",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Color toner",
   "main": "build/index.js",
   "scripts": {
