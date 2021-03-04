@@ -115,7 +115,7 @@ function App() {
         <FlexContainer>
           <DisplayLoop bgColor={color}><Span>{color}</Span></DisplayLoop>
           {
-            (new Array(50).fill(0)).map((v, i) => {
+            (new Array(20).fill(0)).map((v, i) => {
               oldColorL = colortone(oldColorL, ratio)
               return (<DisplayLoop key={`${i}-l`} bgColor={oldColorL}><Span>{oldColorL}</Span></DisplayLoop>)
             })
